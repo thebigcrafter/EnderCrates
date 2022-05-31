@@ -39,12 +39,14 @@ function About() {
                 What is EnderCrates?
               </h1>
               <p className="mt-3 has-text-weight-light">
-              EnderCrates is a{" "}
+                EnderCrates is a{" "}
                 <Link href="https://pmmp.io">
                   <a target="_blank">PocketMine</a>
                 </Link>{" "}
-                plugin repository. You can publish your plugins to this website, where
-                everyone can download it. With us, you just submit your plugin, wait for a malware check from us and it will be published if it doesn't contain any malware.
+                plugin repository. You can publish your plugins to this website,
+                where everyone can download it. With us, you just submit your
+                plugin, wait for a malware check from us and it will be
+                published if it doesn{"'"}t contain any malware.
               </p>
               <div className="container mt-3">
                 <div className="columns mt-2 is-vcentered">
