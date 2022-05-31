@@ -1,5 +1,3 @@
-import { GetServerSideProps } from "next";
-
 import "bulma/css/bulma.min.css";
 
 const Error = ({ statusCode }: { statusCode: number }) => {
@@ -19,8 +17,8 @@ const Error = ({ statusCode }: { statusCode: number }) => {
     );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({res, err}) => {
-     const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+export async function getStaticProps({ res, err }: { res: any; err: any }) {
+    const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
     return {
         props: {
             statusCode,
