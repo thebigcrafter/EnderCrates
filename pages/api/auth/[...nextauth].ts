@@ -1,8 +1,7 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-
-import client from "../../../db/client";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from '@prisma/client';
 
 export default NextAuth({
   providers: [
@@ -19,5 +18,5 @@ export default NextAuth({
       },
     }),
   ],
-  adapter: MongoDBAdapter(client),
+  adapter: PrismaAdapter(new PrismaClient()),
 });

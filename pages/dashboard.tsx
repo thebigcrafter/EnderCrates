@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
 
 import Link from "next/link";
 import Menu from "../components/Menu";
@@ -8,10 +9,9 @@ import Footer from "../components/Footer";
 import UserList from "../components/UserList";
 
 import getAdmins from "../utils/admins"
-import MongoClient from "../db/client"
+import prisma from "../prisma/prisma"
 
 import "bulma/css/bulma.css";
-import { GetServerSideProps } from "next";
 
 const Dashboard = ({usersData}: {usersData: any}) => {
     const session = useSession();
@@ -226,12 +226,14 @@ const Dashboard = ({usersData}: {usersData: any}) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-    const users = await (await MongoClient).db(process.env.DATABASE_NAME).collection("users").find({}).toArray();
+    await prisma.$connect();
+
+    const users = await prisma.user.findMany();
 
     const usersData: any[] = [];
 
     users.forEach(user => {
-        usersData.push({id: user._id.toString(), name: user.name, email: user.email});
+        usersData.push({id: user.id.toString(), name: user.name, email: user.email});
     });
 
     return {
